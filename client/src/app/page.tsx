@@ -1,5 +1,5 @@
 import Navbar from "@/components/shared/Navbar";
-import LandingPage from "./(nonedashboard)/landing/page";
+import Landing from "./(nonedashboard)/landing/page";
 import { NAVBAR_HEIGHT } from "@/lib/constants";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
         className={"flex flex-col w-full h-full"}
         style={{ height: `${NAVBAR_HEIGHT}px` }}
       >
-        <LandingPage />
+        <Landing />
       </main>
     </div>
   );

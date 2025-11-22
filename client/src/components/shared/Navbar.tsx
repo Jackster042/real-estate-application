@@ -38,7 +38,7 @@ const Navbar = () => {
           Discover your dream home in the heart of the city.
         </p>
         <div className="flex items-center gap-5">
-          <Link href="/sign-in">
+          <Link href="/signin">
             <Button
               variant="outline"
               className="text-white border-white bg-transparent hover:bg-white hover:text-gray-800 cursor-pointer rounded-lg"
@@ -46,7 +46,7 @@ const Navbar = () => {
               Sign In
             </Button>
           </Link>
-          <Link href="/sign-up">
+          <Link href="/signup">
             <Button
               variant="secondary"
               className="text-white bg-destructive border-white  hover:bg-white hover:text-gray-800 cursor-pointer rounded-lg"
