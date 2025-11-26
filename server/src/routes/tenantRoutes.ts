@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { authMiddleware } from "../middlewares/authMiddleware.js";
 import {
   addFavoriteProperty,
   createTenant,
@@ -11,9 +10,9 @@ import {
 
 const router = Router();
 
+router.post("/", createTenant);
 router.get("/:cognitoId", getTenant);
 router.put("/:cognitoId", updateTenant);
-router.post("/", createTenant);
 router.get("/:cognitoId/current-residences", getCurrentResidences);
 router.post("/:cognitoId/favorites/:propertyId", addFavoriteProperty);
 router.delete("/:cognitoId/favorites/:propertyId", removeFavoriteProperty);

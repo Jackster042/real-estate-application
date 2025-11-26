@@ -6,7 +6,6 @@ const prisma = new PrismaClient();
 
 export const getTenant = async (req: Request, res: Response): Promise<void> => {
   try {
-    // TODO: CHECK IF WE NEED TO AWAIT REQ.PARAMS
     const { cognitoId } = req.params;
 
     if (!cognitoId) {
@@ -27,7 +26,7 @@ export const getTenant = async (req: Request, res: Response): Promise<void> => {
       res.status(404).json({ message: "Tenant not found" });
       return;
     } else {
-      res.status(200).json(tenant);
+      res.json(tenant);
     }
   } catch (error: any) {
     console.error("Error fetching tenant info", error);
@@ -52,7 +51,7 @@ export const createTenant = async (
       },
     });
 
-    res.status(200).json(tenant);
+    res.status(201).json(tenant);
   } catch (error: any) {
     console.error("Error creating tenant", error);
     res

@@ -4,7 +4,8 @@ import React from "react";
 import { Button } from "../ui/button";
 import { NAVBAR_HEIGHT } from "@/lib/constants";
 
-const Navbar = () => {
+const Navbar = ({ user }: any) => {
+  console.log(user, "user");
   return (
     <div
       className="fixed top-0 left-0 w-full z-50 shadow-xl"
@@ -37,24 +38,33 @@ const Navbar = () => {
         <p className="text-primary-foreground hidden md:block">
           Discover your dream home in the heart of the city.
         </p>
-        <div className="flex items-center gap-5">
-          <Link href="/signin">
-            <Button
-              variant="outline"
-              className="text-white border-white bg-transparent hover:bg-white hover:text-gray-800 cursor-pointer rounded-lg"
-            >
-              Sign In
-            </Button>
-          </Link>
-          <Link href="/signup">
-            <Button
-              variant="secondary"
-              className="text-white bg-destructive border-white  hover:bg-white hover:text-gray-800 cursor-pointer rounded-lg"
-            >
-              Sign Up
-            </Button>
-          </Link>
-        </div>
+        {user ? (
+          <p>
+            Hello,{" "}
+            <span className="text-lg font-semibold capitalize">
+              {user.cognitoInfo.username}
+            </span>
+          </p>
+        ) : (
+          <div className="flex items-center gap-5">
+            <Link href="/signin">
+              <Button
+                variant="outline"
+                className="text-white border-white bg-transparent hover:bg-white hover:text-gray-800 cursor-pointer rounded-lg"
+              >
+                Sign In
+              </Button>
+            </Link>
+            <Link href="/signup">
+              <Button
+                variant="secondary"
+                className="text-white bg-destructive border-white  hover:bg-white hover:text-gray-800 cursor-pointer rounded-lg"
+              >
+                Sign Up
+              </Button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

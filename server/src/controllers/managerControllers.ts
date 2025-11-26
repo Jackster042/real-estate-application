@@ -53,7 +53,7 @@ export const createManager = async (
     });
     console.log(manager, "CREATED MANAGER");
 
-    res.status(200).json(manager);
+    res.status(201).json(manager);
   } catch (error: any) {
     console.error("Error creating manager", error);
     res

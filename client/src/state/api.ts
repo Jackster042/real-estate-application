@@ -5,7 +5,7 @@ import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
+    baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL!,
     prepareHeaders: async (headers) => {
       const session = await fetchAuthSession();
       const { idToken } = session.tokens ?? {};
@@ -19,7 +19,7 @@ export const api = createApi({
   tagTypes: [],
   endpoints: (build) => ({
     getAuthUser: build.query<User, void>({
-      queryFn: async (_, queryApi, _extraoptions, _fetchWithBQ) => {
+      queryFn: async (_, _queryApi, _extraoptions, fetchWithBQ) => {
         try {
           const session = await fetchAuthSession();
           const { idToken } = session.tokens ?? {};
@@ -31,9 +31,9 @@ export const api = createApi({
               ? `/managers/${user.userId}`
               : `/tenants/${user.userId}`;
 
-          let userDetailsResponse = await _fetchWithBQ(endpoint);
-          console.log(userDetailsResponse, "USER DETAILS RESPONSE");
+          let userDetailsResponse = await fetchWithBQ(endpoint);
 
+          // if user doesn't exist, create new user
           if (
             userDetailsResponse.error &&
             userDetailsResponse.error.status === 404
@@ -42,9 +42,11 @@ export const api = createApi({
               user,
               idToken,
               userRole,
-              _fetchWithBQ
+              fetchWithBQ
             );
           }
+
+          console.log(userDetailsResponse, "userDetailsResponse");
 
           return {
             data: {
@@ -54,7 +56,6 @@ export const api = createApi({
             },
           };
         } catch (error: any) {
-          console.error("Failed to retrieve user information", error);
           return { error: error.message || "Could not fetch user data" };
         }
       },
