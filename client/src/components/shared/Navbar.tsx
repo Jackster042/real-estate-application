@@ -41,7 +41,7 @@ const Navbar = () => {
       <div className="flex justify-between items-center w-full py-3 px-8 bg-foreground text-white">
         <div className="flex items-center gap-6 md:gap-4">
           {isDashboardPage && (
-            <div className="md:hidden">
+            <div>
               <SidebarTrigger />
             </div>
           )}
