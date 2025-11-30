@@ -69,7 +69,7 @@ const Navbar = () => {
           {isDashboardPage && authUser && (
             <Button
               variant="secondary"
-              className="md:ml-4 bg-primary-50 text-primary-700 hover:bg-secondary-500 hover:text-primary-50"
+              className="md:ml-4 bg-white text-black hover:bg-red-300 hover:text-white"
               onClick={() =>
                 router.push(
                   authUser.userRole?.toLowerCase() === "manager"
