@@ -1,13 +1,14 @@
 "use client";
 
+import Sidebar from "@/components/shared/AppSidebar";
 import Navbar from "@/components/shared/Navbar";
-import { Sidebar, SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { NAVBAR_HEIGHT } from "@/lib/constants";
 import { useGetAuthUserQuery } from "@/state/api";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-const DashboardLayout = () => {
+const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const { data: authUser, isLoading: authLoading } = useGetAuthUserQuery();
   const router = useRouter();
   const pathname = usePathname();
@@ -42,9 +43,9 @@ const DashboardLayout = () => {
         <Navbar />
         <div style={{ marginTop: `${NAVBAR_HEIGHT}px` }}>
           <main className="flex">
-            <Sidebar />
+            <Sidebar userType={authUser.userRole.toLowerCase()} />
             <div className="flex-grow transition-all duration-300">
-              {/* {children} */}
+              {children}
             </div>
           </main>
         </div>
