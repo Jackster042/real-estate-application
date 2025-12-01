@@ -12,14 +12,14 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const { data: authUser, isLoading: authLoading } = useGetAuthUserQuery();
   const router = useRouter();
   const pathname = usePathname();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (authUser) {
       const userRole = authUser.userRole?.toLowerCase();
       if (
-        (userRole === "manager" && pathname.startsWith("/manager")) ||
-        (userRole === "tenant" && pathname.startsWith("/tenant"))
+        (userRole === "manager" && pathname.startsWith("/tenants")) ||
+        (userRole === "tenant" && pathname.startsWith("/managers"))
       ) {
         router.push(
           userRole === "manager"
@@ -34,8 +34,8 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   }, [authUser, pathname, router]);
 
   //   TODO: ADD COMPONENTS FOR THESE 2 OPTIONS
-  if (authLoading || isLoading) return <div>Loading...</div>;
-  if (!authUser) return null;
+  if (authLoading || isLoading) return <>Loading...</>;
+  if (!authUser?.userRole) return null;
 
   return (
     <SidebarProvider>

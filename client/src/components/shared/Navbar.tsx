@@ -26,7 +26,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   const isDashboardPage =
-    pathname.includes("manager") || pathname.includes("tenant");
+    pathname.includes("/managers") || pathname.includes("/tenants");
 
   const handleSighOut = async () => {
     await signOut();
