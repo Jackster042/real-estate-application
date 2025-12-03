@@ -84,6 +84,8 @@ export const updateTenant = async (
       },
     });
 
+    console.log(updateTenant, "UPDATED TENANT FROM TENANT CONTROLLER");
+
     res.status(200).json(updateTenant);
   } catch (error: any) {
     console.error("Error updating tenant", error);

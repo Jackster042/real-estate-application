@@ -9,6 +9,9 @@ import { authMiddleware } from "./middlewares/authMiddleware.js";
 // Route Imports
 import tenantRoutes from "./routes/tenantRoutes.js";
 import managerRoutes from "./routes/managerRoutes.js";
+import propertyRoutes from "./routes/propertyRoutes.js";
+import leaseRoutes from "./routes/leaseRoutes.js";
+import applicationRoutes from "./routes/applicationRoutes.js";
 
 // Config
 dotenv.config();
@@ -29,6 +32,9 @@ app.get("/", (req, res) => {
 
 app.use("/tenants", authMiddleware(["tenant"]), tenantRoutes);
 app.use("/managers", authMiddleware(["manager"]), managerRoutes);
+app.use("/properties", propertyRoutes);
+app.use("/leases", leaseRoutes);
+app.use("/applications", applicationRoutes);
 
 // Server
 const port = process.env.PORT || 3002;
